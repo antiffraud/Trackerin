@@ -169,8 +169,8 @@ class MainWindow(QMainWindow):
         self.load_header_profile_picture()
         
         profile_data = self.safe_get_user_profile()
-        user_name = profile_data['fullname'] if profile_data else "Muhamad Erwin Hariadinata"
-        user_status = profile_data['status_type'] if profile_data else "Student"
+        user_name = profile_data['fullname'] if profile_data else "Demo User"
+        user_status = profile_data['status_type'] if profile_data else "User"
         self.user_label = QLabel(f"{user_name}\n{user_status}")
         self.user_label.setObjectName("userLabel")
         
@@ -188,6 +188,21 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(f"Error getting user profile: {e}")
             return None
+
+    @staticmethod
+    def format_profile_status(profile_data, current_time=None):
+        """Build a status label without exposing hard-coded personal data."""
+        profile = profile_data or {
+            "fullname": "Demo User",
+            "status_type": "User",
+            "student_id": "",
+        }
+        parts = [f"{profile['status_type']}: {profile['fullname']}"]
+        if profile.get("student_id"):
+            parts.append(f"ID: {profile['student_id']}")
+        if current_time:
+            parts.append(current_time)
+        return " | ".join(parts)
     
     def load_header_profile_picture(self):
         try:
@@ -299,13 +314,10 @@ class MainWindow(QMainWindow):
         
         try:
             profile_data = self.safe_get_user_profile()
-            if profile_data:
-                status_text = f"Student: {profile_data['fullname']} | ID: {profile_data['student_id']}"
-            else:
-                status_text = "Student: Muhamad Erwin Hariadinata | ID: F1D022065"
+            status_text = self.format_profile_status(profile_data)
         except Exception as e:
             print(f"Error in setup_status_bar: {e}")
-            status_text = "Student: Muhamad Erwin Hariadinata | ID: F1D022065"
+            status_text = self.format_profile_status(None)
         
         left_status_label = QLabel(status_text)
         left_status_label.setStyleSheet(Styles.STUDENT_INFO_STATUS_STYLE)
@@ -562,8 +574,8 @@ class MainWindow(QMainWindow):
     def refresh_header_profile(self):
         try:
             profile_data = self.safe_get_user_profile()
-            user_name = profile_data['fullname'] if profile_data else "Muhamad Erwin Hariadinata"
-            user_status = profile_data['status_type'] if profile_data else "Student"
+            user_name = profile_data['fullname'] if profile_data else "Demo User"
+            user_status = profile_data['status_type'] if profile_data else "User"
             
             self.user_label.setText(f"{user_name}\n{user_status}")
             
@@ -577,10 +589,7 @@ class MainWindow(QMainWindow):
             current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
             profile_data = self.safe_get_user_profile()
             
-            if profile_data:
-                status_text = f"{profile_data['status_type']}: {profile_data['fullname']} | ID: {profile_data['student_id']} | {current_time}"
-            else:
-                status_text = f"Student: Muhamad Erwin Hariadinata | ID: F1D022065 | {current_time}"
+            status_text = self.format_profile_status(profile_data, current_time)
             
             for widget in self.status_bar.children():
                 if isinstance(widget, QLabel) and not widget.text().startswith("2025"):
@@ -592,7 +601,7 @@ class MainWindow(QMainWindow):
             try:
                 for widget in self.status_bar.children():
                     if isinstance(widget, QLabel) and not widget.text().startswith("2025"):
-                        widget.setText("Student: Muhamad Erwin Hariadinata | ID: F1D022065")
+                        widget.setText(self.format_profile_status(None))
                         break
             except Exception as fallback_error:
                 print(f"Fallback status bar update failed: {fallback_error}")

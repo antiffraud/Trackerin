@@ -181,7 +181,7 @@ class ProfilePage(QWidget):
         if profile_data:
             name_label = QLabel(profile_data['fullname'])
         else:
-            name_label = QLabel("Muhamad Erwin Hariadinata")
+            name_label = QLabel("Demo User")
         
         name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         name_label.setStyleSheet("""
