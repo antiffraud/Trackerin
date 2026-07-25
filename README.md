@@ -19,6 +19,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows_|_macOS_|_Linux-0E2C75?style=for-the-badge&logo=apple&logoColor=white)]()
 [![LOC](https://img.shields.io/badge/3,300+_Lines-of_Code-2c3e50?style=for-the-badge&logo=github&logoColor=white)]()
 [![Version](https://img.shields.io/badge/Version-1.1-28a745?style=for-the-badge)]()
+[![Tests](https://github.com/antiffraud/Trackerin/actions/workflows/tests.yml/badge.svg)](https://github.com/antiffraud/Trackerin/actions/workflows/tests.yml)
 
 <br/>
 
@@ -591,11 +592,11 @@ CREATE TABLE user_profile (
 
 ```bash
 # 1️⃣ Clone
-git clone https://github.com/yourusername/trackerin.git
-cd trackerin
+git clone https://github.com/antiffraud/Trackerin.git
+cd Trackerin
 
-# 2️⃣ Install (just one dependency!)
-pip install PyQt6
+# 2️⃣ Install
+python -m pip install -r requirements.txt
 
 # 3️⃣ Run
 python main.py
@@ -608,6 +609,7 @@ python main.py
 
 ```
 trackerin/
+├── .github/workflows/       # Automated validation
 ├── assets/
 │   ├── logo.png              # App branding
 │   ├── hero_banner.png       # README hero banner
@@ -623,7 +625,8 @@ trackerin/
 ├── export_page.py            # Data export interface
 ├── database.py               # Database operations
 ├── styles.py                 # Design system
-└── trackerin.db              # Auto-created on first launch
+├── tests/                    # Database unit tests
+└── trackerin.db              # Auto-created locally; ignored by Git
 ```
 
 </details>
@@ -748,11 +751,7 @@ trackerin/
 
 **Muhamad Erwin Hariadinata**
 
-Student ID: **F1D022065**
-
-Visual Programming — Semester 6 · 2025
-
-[![Email](https://img.shields.io/badge/Email-erwinhariady@gmail.com-0E2C75?style=for-the-badge&logo=gmail&logoColor=white)](mailto:erwinhariady@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-antiffraud-0E2C75?style=for-the-badge&logo=github&logoColor=white)](https://github.com/antiffraud)
 
 </div>
 
