@@ -44,7 +44,7 @@ class DatabaseHandler:
                 cursor.execute('''
                     INSERT INTO user_profile (fullname, email, student_id, status_type)
                     VALUES (?, ?, ?, ?)
-                ''', ("Muhamad Erwin Hariadinata", "erwinhariady@gmail.com", "F1D022065", "Student"))
+                ''', ("Demo User", "demo@example.com", "", "User"))
             
             conn.commit()
     
